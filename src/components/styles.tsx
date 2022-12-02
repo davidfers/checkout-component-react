@@ -65,9 +65,9 @@ const Input = styled.input<InputProps>`
     color: #a7bac5;
   }
   background: ${({ icon }) =>
-    icon === 'card' && `url(${cardIcon}) no-repeat right`};
+    icon === 'card' && `#ffffff url(${cardIcon}) no-repeat right`};
   background: ${({ icon }) =>
-    icon === 'info' && `url(${infoIcon}) no-repeat right`};
+    icon === 'info' && `#ffffff url(${infoIcon}) no-repeat right`};
   background-size: ${({ icon }) => icon && '14px'};
   background-position-x: ${({ icon }) => icon && 'calc(100% - 13.33px)'};
   width: ${({ small }) => small && '115.5px'};

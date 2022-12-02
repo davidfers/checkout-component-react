@@ -36,12 +36,7 @@ export const handleExpDate = (
   nextInput: RefObject<HTMLInputElement>
 ) => {
   value = value.replace(/\//, '');
-  if (
-    value &&
-    (value.match(/\D$/) ||
-      !value[0].match(/[0-1]/) ||
-      +value.substring(0, 2) > 12) ||
-    value.length > 4
+  if (value && !value.match(/^[01]$|^(0[1-9]|1[0-2])$|^(0[1-9]|1[0-2])\d{1,2}$/)
   )
     return;
   if (value.length === 4) nextInput.current?.focus();
