@@ -2,6 +2,8 @@
 # React Checkout Component
 Componente de checkout para react con [Typescript](https://www.typescriptlang.org/) y [Styled Components](https://styled-components.com/). Utiliza [Vite](https://vitejs.dev/).
 
+Ver [demo](https://react-checkout-form.netlify.app)
+
 ### TABLA DE CONTENIDOS
 
 - [Código](#código)
