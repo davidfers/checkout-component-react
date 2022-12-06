@@ -105,8 +105,6 @@ function Checkout({
           zipCode: { ...paymentInfo.zipCode, value: e.target.value },
         });
         break;
-      default:
-        break;
     }
   };
 
