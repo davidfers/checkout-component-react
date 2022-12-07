@@ -95,6 +95,8 @@ Para arrancar la aplicación compilada ejectuar:
 ### TESTS
 #
 
+Los tests utilizan [Vitest](https://vitest.dev/) y [Testing Library](https://testing-library.com/)
+
 Ejecutar tests   
 `yarn test` o `npm run test`
 
