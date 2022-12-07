@@ -20,12 +20,12 @@ function App() {
 }
 
 function onSubmit(formValues: FormValues) {
-  return new Promise((resolve) => {
+  return new Promise((resolve) =>
     setTimeout(() => {
       console.log(formValues);
       resolve('OK');
-    }, 1000);
-  });
+    }, 1000)
+  );
 }
 
 export default App;
