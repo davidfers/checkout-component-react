@@ -3,7 +3,7 @@
 
 
 # React Checkout Component
-React checkout component with [Typescript](https://www.typescriptlang.org/) y [Styled Components](https://styled-components.com/). Uses [Vite](https://vitejs.dev/).
+React checkout component with [Typescript](https://www.typescriptlang.org/) and [Styled Components](https://styled-components.com/). Uses [Vite](https://vitejs.dev/).
 
 [Live demo](https://react-checkout-form.netlify.app)
 
@@ -75,26 +75,26 @@ Each of the above mentioned properties is an object with the following propertie
   (value: string, paymentInfo: PaymentInfo, setPaymentInfo: (value: React.SetStateAction<PaymentInfo>) => void, nextInput: React.RefObject<HTMLInputElement>): void
   ```
 #### validations.ts
-Part of the validation is done with the handlers described above since it is not allowed to enter characters that are not permitted.   
+Part of the validation is done with the handlers described above since it is not possible to enter characters that are not permitted.   
 
 The validateAll function in this file basically checks that the fields are not empty or have a specific length and updates the error property of the state accordingly.
 
 ### INSTALL
 #
 
-Download the source code
+Download the source code   
 `git clone https://github.com/davidfers/checkout-component-react.git`
 
-You must have Node 16.11 or higher.
+You must have Node 16.11 or higher.   
 Run `yarn` or `npm install`
 
-To start the application in development mode execute:
+To start the application in development mode execute:   
 `yarn dev` or `npm run dev`
 
-For compilation and bundling run:
+For compilation and bundling run:   
 `yarn build` or `npm run build`
 
-To start the compiled application run:
+To start the compiled application run:   
 `yarn preview` or `npm run preview`
 
 ### TESTS
