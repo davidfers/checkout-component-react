@@ -32,6 +32,7 @@ describe('Checkout', () => {
       zipCode: '12345',
     });
   });
+
   test('Every field has an error message when empty', async () => {
     clickConfirmButton();
     await waitFor(() => {
@@ -44,6 +45,7 @@ describe('Checkout', () => {
       expect(getZipCodeInput()).toHaveErrorMessage('Zip Code cannot be empty');
     });
   });
+
   test('If an invalid character is typed should not be rendered', async () => {
     await user.type(getCardInput(), '1234 5678 9p12 3456');
     expect(getCardInput()).toHaveValue('1234 5678 9123 456');
@@ -54,7 +56,8 @@ describe('Checkout', () => {
     await user.type(getCvvInput(), '1a3');
     expect(getCvvInput()).toHaveValue('13');
   });
-  test('If confirmed with errors, validation will happen with every typing', async () => {
+
+  test('If confirmed with errors, validation should happen with every typing', async () => {
     await user.type(getCardInput(), '1234 5678 9012 345');
     clickConfirmButton();
     await waitFor(() => {
@@ -69,28 +72,36 @@ describe('Checkout', () => {
       );
     });
   });
+
   test('Submitted message should appear and disappear after 5s', async () => {
     //To be able to make use of fake timers, delay must be set to null
     const user = userEvent.setup({ delay: null });
+
     vi.useFakeTimers();
     await user.type(getNameInput(), 'John Doe');
     await user.type(getCardInput(), '1234 5678 9012 3456');
     await user.type(getExpDateInput(), '12/34');
     await user.type(getCvvInput(), '123');
     await user.type(getZipCodeInput(), '12345');
-    await user.click(screen.getByRole('button', { name: /confirm payment/i }));
-    await waitFor(
-      () => expect(screen.queryByText(/submitted!/i)).toBeInTheDocument(),
-      {
-        timeout: 1000,
-        onTimeout: () => new Error('No Submitted message appeared'),
-      }
-    );
+    user.click(screen.getByRole('button', { name: /confirm payment/i }));
+    await waitFor(() => expect(getSubmittedMessage()).toBeInTheDocument(), {
+      timeout: 2000,
+      onTimeout: () => new Error('No Submitted message appeared'),
+    });
     act(() => {
       vi.advanceTimersByTime(5000);
     });
-    expect(screen.queryByText(/submitted!/i)).not.toBeInTheDocument();
+    expect(getSubmittedMessage()).not.toBeInTheDocument();
     vi.useRealTimers();
+  });
+
+  test('Focus should jump to next field when card info is typed', async () => {
+    await user.type(getCardInput(), '1234 5678 9012 3456');
+    expect(getExpDateInput()).toHaveFocus();
+    await user.type(getExpDateInput(), '12/34');
+    expect(getCvvInput()).toHaveFocus();
+    await user.type(getCvvInput(), '123');
+    expect(getZipCodeInput()).toHaveFocus();
   });
 });
 
@@ -114,6 +125,10 @@ function getZipCodeInput() {
   return screen.getByRole('textbox', { name: /zip code/i });
 }
 
-function clickConfirmButton() {
-  user.click(screen.getByRole('button', { name: /confirm payment/i }));
+function getSubmittedMessage() {
+  return screen.queryByText(/submitted!/i);
 }
+
+const clickConfirmButton = () => {
+  user.click(screen.getByRole('button', { name: /confirm payment/i }));
+};
