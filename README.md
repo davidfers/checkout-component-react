@@ -36,6 +36,10 @@ La estructura de carpetas del código es la siguiente:
 
 
 #### Checkout.tsx
+
+  El componente `<Checkout onSubmit= />` se debe implementar con el atributo `onSubmit`, que será la función que se ejecute cuando se valide el formulario.
+  La función `onSubmit` del ejemplo está definida en `App.tsx`, devuelve una promesa que se resuelve con un timeout de 1s y necesita como argumento los valores del formulario del tipo `FormValues` definido en `types.d.ts`.
+  
   El estado principal del componente es un objecto `paymentInfo` con los campos input como propiedaded
   ``` 
    name, 
@@ -55,7 +59,7 @@ Cada campo es un objecto con las siguientes propiedades
   
   Cuando se hace click en el botón `Confirm Payment`, se hace una validación. Si todos los campos son válidos se enviará el formulario, en caso contrario se modificará una referencia a `triedSubmit` y aparecerán los errores, a partir de ahora se hará una validación por cada caracter que se modifique en el formulario.
   
-  En caso de que el formulario sea valido he simulado la llamada al servidor con un timeout para que se vea un estado `isLoading`, que mostrá un spinner en el botón, antes de cambiar el estado a isSuccess mostrando una notificación.
+  En caso de que el formulario sea valido se llamará a `await onSubmit(FormValues)`, y mientras se resuelve la promesa, el estado  `isLoading` cambiará a true, esto mostrá un spinner en el botón. Cuando la promesa se resuelve, el estado isSuccess cambia a true, mostrando una notificación.
   
   #### handlers.ts
   Para controlar los valores se hace uso de las funciones que se encuentran en el archivo `handlers.ts`
