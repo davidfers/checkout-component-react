@@ -91,9 +91,9 @@ Para arrancar la aplicación compilada ejectuar:
 ### TESTS
 #
 
-Ejecutar tests
+Ejecutar tests   
 `yarn test` o `npm run test`
 
-Comprobar la cobertura de código
+Comprobar la cobertura de código   
 `yarn coverage` o `npm run coverage`
 
