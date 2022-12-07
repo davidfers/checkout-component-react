@@ -5,7 +5,7 @@ import { FormEvent } from 'react';
 import { handleCardNumber, handleCVV, handleExpDate } from './handlers';
 import { validateAll } from './validations';
 import * as S from './styles';
-import type { PaymentInfo } from './types';
+import type { FormValues, PaymentInfo } from './types';
 
 const initialData: PaymentInfo = {
   name: {
@@ -35,7 +35,11 @@ const initialData: PaymentInfo = {
   },
 };
 
-function Checkout() {
+function Checkout({
+  onSubmit,
+}: {
+  onSubmit: (formValues: FormValues) => Promise<unknown>;
+}) {
   const [paymentInfo, setPaymentInfo] = useState(initialData);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -101,21 +105,24 @@ function Checkout() {
           zipCode: { ...paymentInfo.zipCode, value: e.target.value },
         });
         break;
-      default:
-        break;
     }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     triedSubmitRef.current = true;
     if (validateAll(paymentInfo, setPaymentInfo)) {
       setIsLoading(true);
       triedSubmitRef.current = false;
-      setTimeout(() => {
-        setIsSuccess(true);
-        setIsLoading(false);
-      }, 1000);
+      await onSubmit({
+        name: nameValue,
+        cardNumber: cardValue,
+        expDate: expDateValue,
+        cvv: cvvValue,
+        zipCode: zipCodeValue,
+      });
+      setIsLoading(false);
+      setIsSuccess(true);
     }
   };
 
@@ -127,83 +134,104 @@ function Checkout() {
       </S.CheckoutHeader>
       <S.CheckoutForm onSubmit={(e) => handleSubmit(e)}>
         <S.FormGroup>
-          <label htmlFor=''>Full name</label>
+          <label htmlFor='name'>Full name</label>
           <S.Input
+            id='name'
             type='text'
             name='name'
             placeholder='Your Name'
             value={paymentInfo.name.value}
             onChange={handleChange}
+            aria-errormessage='name-error'
+            aria-invalid={paymentInfo.name.error}
             error={paymentInfo.name.error}
             ref={nameInputRef}
           />
           {paymentInfo.name.error && (
-            <S.Error>{paymentInfo.name.errorMessage}</S.Error>
+            <S.Error id='name-error'>{paymentInfo.name.errorMessage}</S.Error>
           )}
         </S.FormGroup>
         <S.FormGroup>
-          <label htmlFor=''>Card Number</label>
+          <label htmlFor='cardNumber'>Card Number</label>
           <S.Input
+            id='cardNumber'
             type='text'
             name='cardNumber'
             placeholder='1234 1234 1234 1234'
             icon='card'
             value={paymentInfo.cardNumber.value}
             onChange={handleChange}
+            aria-errormessage='cardNumber-error'
+            aria-invalid={paymentInfo.cardNumber.error}
             error={paymentInfo.cardNumber.error}
           />
           {paymentInfo.cardNumber.error && (
-            <S.Error>{paymentInfo.cardNumber.errorMessage}</S.Error>
+            <S.Error id='cardNumber-error'>
+              {paymentInfo.cardNumber.errorMessage}
+            </S.Error>
           )}
         </S.FormGroup>
         <S.FlexRow>
           <S.FormGroup>
-            <label htmlFor=''>Expiration</label>
+            <label htmlFor='expDate'>Expiration</label>
             <S.Input
+              id='expDate'
               type='text'
               name='expDate'
               placeholder='MM/YY'
               value={paymentInfo.expDate.value}
               onChange={handleChange}
+              aria-errormessage='expDate-error'
+              aria-invalid={paymentInfo.expDate.error}
               error={paymentInfo.expDate.error}
               small
               ref={expDateInputRef}
             />
             {paymentInfo.expDate.error && (
-              <S.Error>{paymentInfo.expDate.errorMessage}</S.Error>
+              <S.Error id='expDate-error'>
+                {paymentInfo.expDate.errorMessage}
+              </S.Error>
             )}
           </S.FormGroup>
           <S.FormGroup>
             <label htmlFor='cvv'>CVV</label>
             <S.Input
+              id='cvv'
               type='text'
               name='cvv'
               placeholder='···'
               icon='info'
               value={paymentInfo.cvv.value}
               onChange={handleChange}
+              aria-errormessage='cvv-error'
+              aria-invalid={paymentInfo.cvv.error}
               error={paymentInfo.cvv.error}
               small
               ref={cvvInputRef}
             />
             {paymentInfo.cvv.error && (
-              <S.Error>{paymentInfo.cvv.errorMessage}</S.Error>
+              <S.Error id='cvv-error'>{paymentInfo.cvv.errorMessage}</S.Error>
             )}
           </S.FormGroup>
         </S.FlexRow>
         <S.FormGroup>
-          <label htmlFor=''>Zip Code</label>
+          <label htmlFor='zipCode'>Zip Code</label>
           <S.Input
+            id='zipCode'
             type='text'
             name='zipCode'
             placeholder='Your Zip'
             value={paymentInfo.zipCode.value}
             onChange={handleChange}
+            aria-errormessage='zipCode-error'
+            aria-invalid={paymentInfo.zipCode.error}
             error={paymentInfo.zipCode.error}
             ref={zipCodeInputRef}
           />
           {paymentInfo.zipCode.error && (
-            <S.Error>{paymentInfo.zipCode.errorMessage}</S.Error>
+            <S.Error id='zipCode-error'>
+              {paymentInfo.zipCode.errorMessage}
+            </S.Error>
           )}
         </S.FormGroup>
         <div>

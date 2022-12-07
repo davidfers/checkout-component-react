@@ -12,8 +12,17 @@ export interface PaymentInfo {
   zipCode: FormField;
 }
 
+export interface FormValues {
+  name: string,
+  cardNumber: string,
+  expDate: string,
+  cvv: string,
+  zipCode: string,
+}
+
 export interface InputProps {
   readonly icon?: 'card' | 'info';
   readonly small?: boolean;
   readonly error?: boolean;
 }
+

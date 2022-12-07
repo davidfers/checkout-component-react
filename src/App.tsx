@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Checkout from './components/Checkout';
+import { FormValues } from './components/types';
 import GlobalStyles from './globalStyles';
 
 const Container = styled.div`
@@ -13,9 +14,18 @@ function App() {
   return (
     <Container>
       <GlobalStyles />
-      <Checkout />
+      <Checkout onSubmit={onSubmit} />
     </Container>
   );
+}
+
+function onSubmit(formValues: FormValues) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log(formValues);
+      resolve('OK');
+    }, 1000);
+  });
 }
 
 export default App;

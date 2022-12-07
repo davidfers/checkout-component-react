@@ -17,6 +17,6 @@ export const validateAll = (paymentInfo: PaymentInfo, setPaymentInfo: (value: Se
     zipCode: { ...prev.zipCode, error: zipCodeError },
     cvv: { ...prev.cvv, error: CVVError },
 
-  }))
+  }));
   return !nameError && !cardError && !expDateError && !zipCodeError && !CVVError;
 }

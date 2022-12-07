@@ -11,6 +11,7 @@ Ver [demo](https://react-checkout-form.netlify.app)
   - [handlers.ts](#handlersts)
   - [validations.ts](#validationsts)
 - [Instalar](#instalar)
+- [Tests](#tests)
 
 
 
@@ -25,6 +26,7 @@ La estructura de carpetas del código es la siguiente:
       ├── assets                    # Imágenes y fuentes
       ├── components                # Carpeta con el componente y archivos relacionados
       |  ├── Checkout.tsx           # Componente Checkout
+      |  ├── Checkout.test.tsx      # Tests
       |  ├── styles.tsx             # Styled components
       |  ├── handlers.ts            # Funciones que se encargan de controlar el onChange de los inputs
       |  ├── validations.ts         # Función de validación
@@ -85,3 +87,13 @@ Para la compilación y la empaquetación ejecutar:
 
 Para arrancar la aplicación compilada ejectuar:   
 `yarn preview` o `npm run preview`
+
+### TESTS
+#
+
+Ejecutar tests
+`yarn test` o `npm run test`
+
+Comprobar la cobertura de código
+`yarn coverage` o `npm run coverage`
+
