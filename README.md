@@ -1,4 +1,4 @@
-[![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/jonatasemidio/multilanguage-readme-pattern/blob/master/README.es.md)
+[![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/davidfers/checkout-component-react/blob/main/README.es.md)
 [![CodeFactor](https://www.codefactor.io/repository/github/davidfers/checkout-component-react/badge)](https://www.codefactor.io/repository/github/davidfers/checkout-component-react)
 
 
@@ -75,8 +75,9 @@ Each of the above mentioned properties is an object with the following propertie
   (value: string, paymentInfo: PaymentInfo, setPaymentInfo: (value: React.SetStateAction<PaymentInfo>) => void, nextInput: React.RefObject<HTMLInputElement>): void
   ```
 #### validations.ts
-Part of the validatino is done with the handlers described above since it is not allowed to enter characters that are not permitted.   
-The validateAll function in this file basically controls that the fields are not empty or have a specific length. Updates the error property of the state.
+Part of the validation is done with the handlers described above since it is not allowed to enter characters that are not permitted.   
+
+The validateAll function in this file basically checks that the fields are not empty or have a specific length and updates the error property of the state accordingly.
 
 ### INSTALL
 #

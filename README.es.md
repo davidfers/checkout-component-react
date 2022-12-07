@@ -1,4 +1,4 @@
-[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/jonatasemidio/multilanguage-readme-pattern/blob/master/README.md)
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/davidfers/checkout-component-react)
 [![CodeFactor](https://www.codefactor.io/repository/github/davidfers/checkout-component-react/badge)](https://www.codefactor.io/repository/github/davidfers/checkout-component-react)
 
 
